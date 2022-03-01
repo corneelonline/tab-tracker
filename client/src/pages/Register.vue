@@ -1,15 +1,45 @@
 <template>
   <div class="register">
     <h1>Register</h1>
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus
-      accusamus, fugit possimus doloribus libero pariatur quaerat odio dicta
-      molestias inventore aspernatur, quisquam accusantium excepturi praesentium
-      eius quis quidem. Ducimus, dolorum!
-    </p>
+    <input
+      type="email"
+      name="email"
+      v-model="email"
+      placeholder="email"
+      aria-label="email"
+    />
+    <br />
+    <input
+      type="password"
+      name="password"
+      v-model="password"
+      placeholder="password"
+      aria-label="password"
+    />
+    <br />
+    <button @click="register">Register</button>
   </div>
 </template>
 
-<script></script>
+<script>
+import AuthenticationService from "@/services/AuthenticationService";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async register() {
+      const response = await AuthenticationService.register({
+        email: this.email,
+        password: this.password,
+      });
+      console.log(response.data);
+    },
+  },
+};
+</script>
 
 <style scoped></style>
