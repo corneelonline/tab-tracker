@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-6">
         <div class="card">
-          <h3 class="card-header">Register</h3>
+          <h3 class="card-header">Login</h3>
           <div class="card-body">
             <form novalidate="true">
               <div class="mb-3">
@@ -34,8 +34,8 @@
                 class="alert alert-danger"
                 role="alert"
               />
-              <button @click="register" type="button" class="btn btn-primary">
-                Register
+              <button @click="login" type="button" class="btn btn-primary">
+                Login
               </button>
             </form>
           </div>
@@ -56,9 +56,9 @@ export default {
     };
   },
   methods: {
-    async register() {
+    async login() {
       try {
-        await AuthenticationService.register({
+        await AuthenticationService.login({
           email: this.email,
           password: this.password,
         });

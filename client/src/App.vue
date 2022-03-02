@@ -1,9 +1,23 @@
 <template>
-  <router-link to="/">Home</router-link> |
-  <router-link to="/register">Register</router-link>
-  <router-view></router-view>
+  <PageHeader />
+  <main id="main">
+    <router-view></router-view>
+  </main>
 </template>
 
-<script></script>
+<script>
+import PageHeader from "@/components/Header.vue";
 
-<style></style>
+export default {
+  name: "app",
+  components: {
+    PageHeader,
+  },
+};
+</script>
+
+<style>
+#main {
+  padding-top: 100px;
+}
+</style>
