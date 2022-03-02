@@ -47,6 +47,11 @@
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService";
+import { mapWritableState } from "pinia";
+import { useUserStore } from "@/store/useUser";
+
+// const store = useUserStore();
+
 export default {
   data() {
     return {
@@ -55,12 +60,20 @@ export default {
       error: false,
     };
   },
+  computed: {
+    ...mapWritableState(useUserStore, ["token"]),
+    ...mapWritableState(useUserStore, ["user"]),
+  },
   methods: {
     async login() {
       try {
-        await AuthenticationService.login({
+        const response = await AuthenticationService.login({
           email: this.email,
           password: this.password,
+        });
+        useUserStore.$patch({
+          token: response.data.token,
+          user: response.data.user,
         });
       } catch (error) {
         this.error = error.response.data.error;
